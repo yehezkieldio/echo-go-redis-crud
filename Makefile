@@ -8,10 +8,10 @@ endif
 DOCKER_COMPOSE_FILE=docker/infrastructure/compose.yml
 
 # Targets
-.PHONY: infra:up infra:down
+.PHONY: infra-up infra-down
 
-infra:up:
+infra-up:
 	docker compose --file $(DOCKER_COMPOSE_FILE) --env-file .env up -d
 
-infra:down:
+infra-down:
 	docker compose --file $(DOCKER_COMPOSE_FILE) --env-file .env down

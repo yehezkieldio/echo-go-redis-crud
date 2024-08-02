@@ -1,11 +1,11 @@
 services:
   postgresql:
-    container_name: infra-postgresql
+    container_name: go-ech-redis-postgresql
     image: postgres:latest
     env_file:
       - path: "../../.env"
     ports:
-    - "5432:5432"
+      - "5432:5432"
     environment:
       POSTGRES_USER: ${DOCKER_DB_USER}
       POSTGRES_PASSWORD: ${DOCKER_DB_PASSWORD}
@@ -13,10 +13,10 @@ services:
     volumes:
       - ./data/pg:/var/lib/postgresql/data
     networks:
-      - imperia-infrastructure
+      - echo-go-redis-infrastructure
   dragonfly:
-    container_name: infra-dragonfly
-    image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
+    container_name: go-ech-redis-dragonfly
+    image: "docker.dragonflydb.io/dragonflydb/dragonfly"
     command: --cluster_mode=emulated --lock_on_hashtags
     ulimits:
       memlock: -1
@@ -25,7 +25,7 @@ services:
     volumes:
       - ./data/df:/data
     networks:
-      - imperia-infrastructure
+      - echo-go-redis-infrastructure
 networks:
-  imperia-infrastructure:
+  echo-go-redis-infrastructure:
     driver: bridge
