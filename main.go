@@ -93,8 +93,7 @@ func initDb() {
 
 func initRedis() {
 	redisClient = redis.NewClient(&redis.Options{
-		Addr:     os.Getenv("DRAGONFLY_HOST"),
-		Password: os.Getenv("DRAGONFLY_PORT"),
+		Addr: os.Getenv("DRAGONFLY_HOST") + ":" + os.Getenv("DRAGONFLY_PORT"),
 	})
 	pool := goredis.NewPool(redisClient)
 	rs = redsync.New(pool)
